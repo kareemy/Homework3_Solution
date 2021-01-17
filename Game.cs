@@ -18,6 +18,9 @@ namespace Homework3
         // I suggest something like: gameName, genre, # of peak players
         // for example "Counter-Strike: Global Offensive, Action, 620,408 peak players
         // Use format specifiers to change formatting of PeakPlayers - {PeakPlayers:N0}
-
+        public override string ToString()
+        {
+            return $"{Name}, {Genre}, {PeakPlayers:N0} peak players";
+        }
     }
 }
