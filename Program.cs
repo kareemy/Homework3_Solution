@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 // You need to add another using directive for LINQ. Put it here. Don't forget!
+using System.Linq;
 
 namespace Homework3
 {
@@ -34,6 +35,216 @@ namespace Homework3
 
             // Question 1: Select the first game in the list.
             // What is the exact data type of this query result? Put your answer in README.md
+            // The data type of this query is a Game object because the query returns just ONE result.
+            Game gameOne = games.First();
+            Console.WriteLine("Query 1: First Game");
+            Console.WriteLine($"------------");
+            Console.WriteLine(gameOne);
+            Console.WriteLine($"------------\n");
+
+            // Question 2: Select the first THREE games.
+            // The data type of this query is a list of games because the query returns multiple results.
+            // The exact data type is IEnumerable<Game>. IEnumberable<> is the data type used by LINQ when querying in-memory data stores like lists
+            var query2 = games.Take(3);
+            Console.WriteLine("Query 2: First THREE games");
+            Console.WriteLine($"------------");
+            foreach (Game g in query2)
+            {
+                Console.WriteLine(g);
+            }
+            Console.WriteLine($"------------\n");
+
+            // Question 3: Select the 3 games after the first 4 games
+            // Use .Skip(4) to skip the first 4 games, then .Take(3) to give us the next three
+            var query3 = games.Skip(4).Take(3);
+            Console.WriteLine("Query 3: The 3 games after the first 4 games");
+            Console.WriteLine($"------------");
+            foreach (Game g in query3)
+            {
+                Console.WriteLine(g);
+            }
+            Console.WriteLine($"------------\n");
+
+            // Question 4: Select games with peak palyers over 100,000 in method syntax
+            var query4 = games.Where(g => g.PeakPlayers > 100000);
+            Console.WriteLine("Query 4 Method Syntax: Games with peak players over 100,000");
+            Console.WriteLine($"------------");
+            foreach (Game g in query4)
+            {
+                Console.WriteLine(g);
+            }
+            Console.WriteLine($"------------\n");
+
+            // Query Syntax
+            var query4QS = from g in games
+                            where g.PeakPlayers > 100000
+                            select g;
+            Console.WriteLine("Query 4 Query Syntax: Games with peak players over 100,000");
+            Console.WriteLine($"------------");
+            foreach (Game g in query4QS)
+            {
+                Console.WriteLine(g);
+            }
+            Console.WriteLine($"------------\n");
+
+            // Question 5: Select games with peak players over 100,000 and a release date before January 1, 2013
+            var query5 = games.Where(g => g.PeakPlayers > 100000).Where(g => g.ReleaseDate < DateTime.Parse("1/1/2013"));            
+            Console.WriteLine("Query 5 Method Syntax: Games with peak players over 100,000 and release date before 1/1/2013");
+            Console.WriteLine($"------------");
+            foreach (Game g in query5)
+            {
+                Console.WriteLine(g);
+            }
+            Console.WriteLine($"------------\n");      
+
+            // Query Syntax
+            var query5QS = from g in games
+                            where g.PeakPlayers > 100000
+                            where g.ReleaseDate < DateTime.Parse("1/1/2013")
+                            select g;
+            Console.WriteLine("Query 5 Query Syntax: Games with peak players over 100,000 and release date before 1/1/2013");
+            Console.WriteLine($"------------");
+            foreach (Game g in query5QS)
+            {
+                Console.WriteLine(g);
+            }
+            Console.WriteLine($"------------\n");     
+
+            // Question 6: Select the first game released prior to 1/1/2006 using .FirstOrDefault()
+            var query6 = games.Where(g => g.ReleaseDate < DateTime.Parse("1/1/2006")).FirstOrDefault();
+            if (query6 == null)
+            {
+                Console.WriteLine("Query 6 .FirstOrDefault(): No top 20 games released before 1/1/2006");
+            }
+            else
+            {
+                Console.WriteLine($"Query 6 .FirstOrDefault(): {query6}");
+            }
+
+            // Question 7: Select the first game released prior to 1/1/2006 using .First()
+            try 
+            {
+                var query7 = games.Where(g => g.ReleaseDate < DateTime.Parse("1/1/2006")).First();
+                Console.WriteLine($"Query 7 .First(): {query7}");
+            }
+            catch
+            {
+                Console.WriteLine("Query 7 .First(): No top 20 games released before 1/1/2006\n");
+            }
+
+            // Question 8: Select the game named Rust using .Single()
+            var query8 = games.Where(g => g.Name == "Rust").Single();
+            Console.WriteLine("Query 8: Select Rust");
+            Console.WriteLine($"------------");
+            Console.WriteLine(query8);
+            Console.WriteLine($"------------\n");
+
+            // Question 9: Select all games ordered by release date oldest to newest.
+            var query9 = games.OrderBy(g => g.ReleaseDate);
+            Console.WriteLine("Query 9 Method Syntax: Games ordered by release date oldest to newest");
+            Console.WriteLine($"------------");
+            foreach (Game g in query9)
+            {
+                Console.WriteLine($"{g}, {g.ReleaseDate.ToShortDateString()}");
+            }
+            Console.WriteLine($"------------\n");    
+
+            // Query Syntax
+            var query9QS = from g in games
+                            orderby g.ReleaseDate
+                            select g;
+
+            // Question 10: Select all games ordered by genre A-Z and then peak players highest to lowest
+            var query10 = games.OrderBy(g => g.Genre).ThenByDescending(g => g.PeakPlayers);
+            Console.WriteLine("Query 10 Method Syntax: Games ordered by genre A-Z and then peak players highest to lowest");
+            Console.WriteLine($"------------");
+            foreach (Game g in query10)
+            {
+                Console.WriteLine(g);
+            }
+            Console.WriteLine($"------------\n");    
+
+            // Query Syntax
+            var query10QS = from g in games
+                orderby g.Genre, g.PeakPlayers descending
+                select g;
+
+            // Question 11: Select just the game name of all games that are free
+            var query11 = games.Where(g => g.Price == 0.00M).Select(g => g.Name);
+            Console.WriteLine($"Query 11 Method Syntax: Games that are free - just the game name. {query11.Count()} results.");
+            Console.WriteLine($"------------");
+            foreach (string gameName in query11)
+            {
+                Console.WriteLine(gameName);
+            }
+            Console.WriteLine($"------------\n");  
+            
+            // Query Syntax
+            var query11QS = from g in games
+                where g.Price == 0.00M
+                select g.Name;
+            
+            // Question 12: Select the game name and peak players of all games that are free
+            // The data type is an anonymous type. We must the var keyword.
+            // This is because we are creating a new type of object on the fly that contains just the game name and peak players
+            var query12 = games.Where(g => g.Price == 0.00M).Select(g => new {g.Name, g.PeakPlayers});
+            Console.WriteLine($"Query 12 Method Syntax: Games that are free - game name and peak players. {query12.Count()} results.");
+            Console.WriteLine($"------------");
+            foreach (var g in query12)
+            {
+                Console.WriteLine($"{g.Name}, {g.PeakPlayers:N0}");
+            }
+            Console.WriteLine($"------------\n");  
+
+            // Query Syntax
+            var query12QS = from g in games
+                where g.Price == 0.00M
+                select new {g.Name, g.PeakPlayers};
+
+            // Question 13: Group the games by developer. Print the results to the console in a similar format to below. 
+            var query13groupBy = games.GroupBy(g => g.Developer).OrderByDescending(g => g.Count());
+            Console.WriteLine("---Games grouped by developer---");
+            foreach (var group in query13groupBy)
+            {
+                Console.WriteLine($"{group.Key} - {group.Count()} game(s)");
+                foreach (var game in group)
+                {
+                    Console.WriteLine("\t" + game);
+                }
+            }
+            Console.WriteLine("---\n");
+
+            var query13groupByQS = from g in games
+                    group g by g.Developer into devGroup
+                    orderby devGroup.Count() descending
+                    select devGroup;
+            /* 
+            foreach (var group in query13groupByQS)
+            {
+                Console.WriteLine($"{group.Key} - {group.Count()} game(s)");
+                foreach (var game in group)
+                {
+                    Console.WriteLine("\t" + game);
+                }
+            }
+            */
+
+            // Question 14: Select the game with the most peak players (just in Method Syntax).
+            var query14 = games.OrderByDescending(g => g.PeakPlayers).First();
+            Console.WriteLine("Game with most players: " + query14);
+
+            var query14a = games.Where(g => g.PeakPlayers == games.Max(h => h.PeakPlayers)).First();
+            Console.WriteLine("Game with most players (alternate query): " + query14a + "\n");
+
+            // Question 15: Select all the games with peak players lower than average number of peak players (just in Method Syntax).
+            var query15 = games.Where(g => g.PeakPlayers < games.Average(h => h.PeakPlayers));
+            Console.WriteLine($"Query 15: Games with peak players lower than the average. {query15.Count()} results.");
+            Console.WriteLine($"------------");
+            foreach (Game g in query15)
+            {
+                Console.WriteLine(g);
+            }
+            Console.WriteLine($"------------\n");
         }
     }
 }

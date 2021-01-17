@@ -1,4 +1,4 @@
-## Your Name:
+## Your Name: Kareem Dana - Homework 3 Solution
 
 # CIDM 3312 Homework 3: Basic LINQ
 The objective of this homework is to practice LINQ queries. You will write several LINQ queries based on data from the top 20 games on Steam (from 2019). Starter code is given in the GitHub repository. That code contains an entity class called `Game` and a List of `games`. The list will be your data source.
@@ -14,11 +14,11 @@ For the following questions, write a LINQ query using the **Method Syntax** unle
 
 1. Select the first game in the list. Answer the following question in this `README.md` file:
 
-What is the exact data type of this query result? **Replace this with your answer**
+What is the exact data type of this query result? **Game object because the query returns just ONE result.**
 
 2. Select the first THREE games. Answer the following question:
 
-What is the exact data type of *this* query result? **Replace this with your answer**
+What is the exact data type of *this* query result? **The exact data type is IEnumerable<Game>. IEnumberable<> is the data type used by LINQ when querying in-memory data stores like lists**
 
 3. Select the 3 games after the first 4 games.
 4. Select games with peak players over 100,000 in both Method and Query Syntax.
