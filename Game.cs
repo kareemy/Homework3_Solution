@@ -6,13 +6,13 @@ namespace Homework3
     public class Game
     {
         public int GameId {get; set;} // Primary Key
-        public string Name {get; set;}
-        public string Developer {get; set;}
-        public string Genre {get; set;}
+        public string Name {get; set;} = string.Empty;
+        public string Developer {get; set;} = string.Empty;
+        public string Genre {get; set;} = string.Empty;
         public int PeakPlayers {get; set;}
         public decimal Price {get; set;} // Price is decimal data type
         public DateTime ReleaseDate {get; set;}
-        public string ReviewScore {get; set;}
+        public string ReviewScore {get; set;} = string.Empty;
 
         // Question 0: Create ToString() method that formats how we will print out each game to the console
         // I suggest something like: gameName, genre, # of peak players
