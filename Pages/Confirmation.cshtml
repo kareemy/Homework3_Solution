@@ -1,0 +1,78 @@
+@page
+@model ConfirmationModel
+
+<h1>Order Confirmed</h1>
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.FirstName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.FirstName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.LastName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.LastName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.Email)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.Email)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.Address)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.Address)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.Country)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.Country)
+    </dd>
+        <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.State)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.State)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.Zip)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.Zip)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.SameShippingInfo)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.SameShippingInfo)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.SaveInformation)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.SaveInformation)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.PaymentType)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.PaymentType)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.NameOnCard)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.NameOnCard)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.OrderItem.CreditCardNumber)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.OrderItem.CreditCardNumber)
+    </dd>
+</dl>
